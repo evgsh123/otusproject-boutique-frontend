@@ -21,21 +21,22 @@ jobs:
         with:
           context: .
           push: true
-          tags: "${{ secrets.REPO_NAME }}/boutique-frontend:${{github.run_number}}"
+          tags: "${{ secrets.REPO_NAME }}/boutique-frontend:v${{github.run_number}}"
 
   deploy_stage:
     runs-on: ubuntu-latest
+    needs: buildandpush
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
         with:
-          name: evgsh123/otusproject-apps-cd
+          repository: evgsh123/otusproject-apps-cd
 
       - uses: fjogeleit/yaml-update-action@main
         name: Update Image Version in the related HelmChart values.yaml
         with:
-          valueFile: '/helm-chart/values.stage.yaml'
+          valueFile: 'helm-chart/values.stage.yaml'
           propertyPath: 'frontend.images.tag'
-          value: ${{  github.run_number }}
+          value: "v${{  github.run_number }}"
           branch: main
           force: true
           commitUserName: bot
