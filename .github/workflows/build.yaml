@@ -38,6 +38,7 @@ jobs:
           propertyPath: 'frontend.images.tag'
           value: "v${{  github.run_number }}"
           branch: main
+          createPR: false
           force: true
           commitUserName: bot
           message: 'Update Image Version frontend to ${{  github.run_number  }}'
