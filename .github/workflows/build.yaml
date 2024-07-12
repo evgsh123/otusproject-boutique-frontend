@@ -44,9 +44,3 @@ jobs:
           force: true
           commitUserName: bot
           message: 'Update Image Version frontend to ${{  github.run_number  }}'
-
-      - uses: ad-m/github-push-action@master
-        name: Push changes
-         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
