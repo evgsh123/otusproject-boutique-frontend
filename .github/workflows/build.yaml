@@ -1,0 +1,24 @@
+name: Build and push
+run-name: ${{ github.actor }} Build source and push to docker
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: ["main"]
+jobs:
+  buildandpush:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Check out code
+      - name: Login to Yandex Cloud Container Registry
+        uses: yc-actions/yc-cr-login@v2
+        with:
+           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - uses: docker/build-push-action@v6
+        name: Build & push Docker image
+        with:
+          context: .
+          push: true
+          tags: "${{ secret.reponame }}/boutique-frontend:${{ github.sha }}"
