@@ -35,6 +35,7 @@ jobs:
       - uses: fjogeleit/yaml-update-action@main
         name: Update Image Version in the related HelmChart values.yaml
         with:
+          repository: 'evgsh123/otusproject-apps-cd'
           valueFile: 'helm-chart/values.stage.yaml'
           propertyPath: 'frontend.images.tag'
           value: "v${{  github.run_number }}"
