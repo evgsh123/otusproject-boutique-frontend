@@ -43,4 +43,5 @@ jobs:
           createPR: false
           force: true
           commitUserName: bot
+          token: ${{ secrets.MYGITHUB_TOKEN }}
           message: 'Update Image Version frontend to ${{  github.run_number  }}'
