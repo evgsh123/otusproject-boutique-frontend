@@ -21,4 +21,24 @@ jobs:
         with:
           context: .
           push: true
-          tags: "${{ secrets.REPO_NAME }}/boutique-frontend:${{ github.sha }}"
+          tags: "${{ secrets.REPO_NAME }}/boutique-frontend:${{github.run_number}}"
+
+  deploy_stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          name: evgsh123/otusproject-apps-cd
+          ref: refs/heads/release
+
+      - uses: fjogeleit/yaml-update-action@main
+        name: Update Image Version in the related HelmChart values.yaml
+        with:
+          valueFile: '/helm-chart/values.stage.yaml'
+          propertyPath: 'frontend.images.tag'
+          value: ${{  github.run_number }}
+          branch: main
+          force: true
+          commitUserName: bot
+          message: 'Update Image Version frontend to ${{  github.run_number  }}'
+
