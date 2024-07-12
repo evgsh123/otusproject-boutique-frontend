@@ -1,5 +1,6 @@
 name: Build and push
 run-name: ${{ github.actor }} Build source and push to docker
+permissions: write-all
 on:
   push:
     branches: [ main ]
