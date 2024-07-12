@@ -29,7 +29,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           name: evgsh123/otusproject-apps-cd
-          ref: refs/heads/release
 
       - uses: fjogeleit/yaml-update-action@main
         name: Update Image Version in the related HelmChart values.yaml
