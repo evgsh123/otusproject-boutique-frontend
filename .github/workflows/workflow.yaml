@@ -1,0 +1,14 @@
+name: Build and deploy service
+run-name: ${{ github.actor }} 
+permissions: write-all
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: ["main"]
+
+ jobs:
+    build:
+      uses: evgsh123/otusproject-apps-cd/github/workflow.yaml
+      with:
+        name: frontend
