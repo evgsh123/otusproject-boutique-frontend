@@ -12,9 +12,9 @@ jobs:
     uses: "evgsh123/otusproject-apps-cd/.github/workflows/workflow.yaml@main"
     with:
       name: "frontend"
+      JOBID: "${{ github.run_number }}"
     secrets:
       YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
       REPO_NAME: ${{ secrets.REPO_NAME }}
       MYGITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
-      JOBID: 
 
