@@ -1,5 +1,4 @@
-name: Build and deploy service
-run-name: ${{ github.actor }} 
+name: Build and deploy 
 permissions: write-all
 on:
   push:
