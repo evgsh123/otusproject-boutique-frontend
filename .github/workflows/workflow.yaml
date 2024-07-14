@@ -7,8 +7,14 @@ on:
   pull_request:
     branches: ["main"]
 
- jobs:
-    build:
-      uses: evgsh123/otusproject-apps-cd/github/workflow.yaml
-      with:
-        name: frontend
+jobs:
+  build:
+    uses: "evgsh123/otusproject-apps-cd/.github/workflows/workflow.yaml@main"
+    with:
+      name: "frontend"
+    secrets:
+      YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+      REPO_NAME: ${{ secrets.REPO_NAME }}
+      MYGITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
+      JOBID: 
+
