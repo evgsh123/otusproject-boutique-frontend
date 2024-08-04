@@ -1,21 +1,21 @@
 name: Build and deploy 
 permissions: write-all
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: ["main"]
+  pull_request_target:
+    types:
+      - closed
   workflow_dispatch: {}
 
 jobs:
-  run:
-    uses: "evgsh123/otusproject-apps-cd/.github/workflows/workflow.yaml@main"
-    with:
-      name: "frontend"
-      JOBID: "${{ github.run_number }}"
-      GITHUBSHA: "${{ github.sha }}"
-    secrets:
-      YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-      REPO_NAME: ${{ secrets.REPO_NAME }}
-      MYGITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
+  if_merged:
+    run:
+      uses: "evgsh123/otusproject-apps-cd/.github/workflows/workflow.yaml@main"
+      with:
+        name: "frontend"
+        JOBID: "${{ github.run_number }}"
+        GITHUBSHA: "${{ github.sha }}"
+      secrets:
+        YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        REPO_NAME: ${{ secrets.REPO_NAME }}
+        MYGITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
 
