@@ -4,12 +4,13 @@ on:
   pull_request_target:
     types:
       - closed
+    branches: ["main"]
   workflow_dispatch: {}
 
 jobs:
-  if_merged:
     run:
       uses: "evgsh123/otusproject-apps-cd/.github/workflows/workflow.yaml@main"
+      if: github.event.pull_request.merged == true
       with:
         name: "frontend"
         JOBID: "${{ github.run_number }}"
